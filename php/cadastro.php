@@ -1,7 +1,7 @@
-<?php
+<?php 
 require 'connection/connection.php';
 
-header('Access-Control-Allow-Origin: http://localhost:3001');
+header('Access-Control-Allow-Origin: http://localhost:3000');
 
 
 $usuario = $_POST['usuario'];
@@ -14,15 +14,16 @@ $query->execute();
 $resultado = $query->get_result();
 
 if($resultado->num_rows > 0){
-    while($row = $resultado->fetch_assoc()) {
-        if($row["senhaUsuario"] == $senha){
-            echo("login");
-            $db->close();
-            return;
-        }
-      }
+    $db->close();
+   echo("usuário já existe!");
+   return;
 }
 
-echo("teste");
+$query = $db->prepare("INSERT INTO Usuarios(nomeUsuario, senhaUsuario) VALUES(?, ?)");
+$query->bind_param("ss", $usuario, $senha);
+$query->execute();
+
+echo ("usuario criado");
+
 $db->close();
 ?>

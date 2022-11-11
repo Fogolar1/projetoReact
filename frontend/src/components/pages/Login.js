@@ -1,4 +1,4 @@
-import FormUsuario from '../../layout/FormUsuario'
+import FormUsuario from '../../layout/components/FormUsuario'
 import { Link } from 'react-router-dom'
 
 function Login(){

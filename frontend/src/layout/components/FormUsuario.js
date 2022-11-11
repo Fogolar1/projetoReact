@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import $ from 'jquery';
+import TextBoxInput from './TextBoxInput';
 
 function FormUsuario({action, botao}){
     const [usuario, setUsuario] = useState("")
@@ -26,10 +27,8 @@ function FormUsuario({action, botao}){
             method="post"
             onSubmit={enviarForm}
             >
-                <label htmlFor="usuario">Usuário :</label>
-                <input id="usuario" name="usuario" type="text" value={usuario} onChange={e => setUsuario(e.target.value)} />
-                <label htmlFor="senha">Senha :</label>
-                <input id="senha" name="senha" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
+                <TextBoxInput id="usuario" conteudo="Usuário :" tipo="text" value={usuario} change={e => setUsuario(e.target.value)} />
+                <TextBoxInput id="senha" conteudo="Senha :" tipo="password" value={senha} change={e => setSenha(e.target.value)} />
                 <button type="submit">{botao}</button>
             </form>
     )

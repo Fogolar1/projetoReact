@@ -1,4 +1,4 @@
-import  FormUsuario  from '../../layout/FormUsuario'
+import  FormUsuario  from '../../layout/components/FormUsuario'
 
 function Cadastro(){
     return(

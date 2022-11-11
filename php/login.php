@@ -1,7 +1,7 @@
 <?php
 require 'connection/connection.php';
 
-header('Access-Control-Allow-Origin: http://localhost:3001');
+header('Access-Control-Allow-Origin: http://localhost:3000');
 
 
 $usuario = $_POST['usuario'];
@@ -20,7 +20,7 @@ if($resultado->num_rows > 0){
             $db->close();
             return;
         }
-      }
+    }
 }
 
 echo("teste");

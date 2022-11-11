@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
-$database = "projetoKabum";
+$password = "neo@123";
+$database = "projetoreact";
 
 $db = mysqli_connect($servername, $username, $password, $database);
 
