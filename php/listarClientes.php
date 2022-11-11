@@ -1,13 +1,11 @@
 <?php
 require 'connection/connection.php';
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-
-
 $query = $db->prepare("SELECT * FROM Clientes ORDER BY idCliente DESC");
 
 $query->execute();
 $resultado = $query->get_result();
+$return_arr = array();
 
 while($row = $resultado->fetch_assoc()) {
     $id = $row["idCliente"];
@@ -30,7 +28,6 @@ while($row = $resultado->fetch_assoc()) {
     "idUsuario" => $idUsuario);
 
 }
-
 
 echo json_encode($return_arr);
 

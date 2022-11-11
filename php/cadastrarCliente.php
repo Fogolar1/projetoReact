@@ -1,9 +1,6 @@
 <?php
 require 'connection/connection.php';
 
-header('Access-Control-Allow-Origin: http://localhost:3000');
-
-
 $nome = $_POST['nome'];
 $dataNasc = $_POST['dataNasc'];
 $cpf = $_POST['cpf'];
