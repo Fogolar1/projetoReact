@@ -1,10 +1,15 @@
 import FormCliente from '../../layout/components/FormCliente'
-
+import Usuario from '../../layout/components/Usuario'
 
 function CadastroClientes(){
     return(
         <>
-            <FormCliente action="http://localhost:8000/cadastrarCliente.php" />
+            {Usuario.getNome() ? (
+                <FormCliente />
+            ) : (
+                <h1>Não tá logado</h1>
+            )}
+            
         </>
     )
 }

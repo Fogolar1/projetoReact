@@ -1,7 +1,15 @@
 <?php
 require 'connection/connection.php';
 
-$query = $db->prepare("SELECT * FROM Clientes ORDER BY idCliente DESC");
+$idCliente = $_GET['id'];
+
+if($idCliente !=null){
+    $query = $db->prepare("SELECT * FROM Clientes where idCliente = ?");
+    $query->bind_param("i", $idCliente);
+}else{
+    $query = $db->prepare("SELECT * FROM Clientes ORDER BY idCliente DESC");
+}
+
 
 $query->execute();
 $resultado = $query->get_result();
@@ -22,12 +30,10 @@ while($row = $resultado->fetch_assoc()) {
     "dataNascimento" => $dataNascimento,
     "cpf" => $cpf,
     "rg" => $rg,
-    "ddd" => $ddd,
-    "telefone" => $telefone,
     "telefone" => $telefone,
     "idUsuario" => $idUsuario);
-
 }
+
 
 echo json_encode($return_arr);
 

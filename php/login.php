@@ -4,6 +4,7 @@ require 'connection/connection.php';
 $usuario = $_POST['usuario'];
 $senha = $_POST['senha'];
 
+
 $query = $db->prepare("SELECT * FROM Usuarios where nomeUsuario = ?");
 $query->bind_param("s", $usuario);
 

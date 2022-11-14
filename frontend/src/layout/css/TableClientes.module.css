@@ -1,0 +1,11 @@
+.tableWrapper{
+    border : 1px solid #ffff;
+    width : 90%;
+    text-align: center;
+    margin-left: 5%;
+}
+
+
+.tableWrapper td, th{
+    border : 1px solid #ffff;
+}

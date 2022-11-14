@@ -1,0 +1,21 @@
+.formLogin{
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    padding : 30px;
+    left : 38%;
+    position : absolute;
+    border : gray 3px solid;
+    height: 100%;
+}
+
+.titulo{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.loginWrapper{
+    top : 30%;
+    position: relative;
+}
+

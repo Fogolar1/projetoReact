@@ -1,38 +1,43 @@
 import { useState } from 'react'
 import $ from 'jquery'
+import TableClientes from '../../layout/components/TableClientes'
+import styles from '../../layout/css/TableClientes.module.css'
+import Usuario from '../../layout/components/Usuario'
 
 function ListarClientes(){
 
     const[resultado, setResultado] = useState("");
 
-    
-
-    $(document).ready(function(){
-        $.ajax({
-            url: 'localhost:8000/listarClientes.php',
-            type: 'GET',
-            dataType: 'jsonp',
-            contentType: 'application/javascript',
-            headers : {'Access-Control-Allow-Origin' : 'http://localhost:3001'},
-            crossDomain : true,
-            success : function(response){
-                console.log(response);
-                setResultado(response);
-            }
-        })
+    $(function(){
+        if(!resultado){
+            $.ajax({
+                url: 'http://localhost:8000/listarClientes.php',
+                type: 'get',
+                dataType: 'json',
+                success : function(response){
+                    setResultado(response);
+                }
+            })
+        }
+        console.log(Usuario.getNome());
     });
+
+
 
     return(
         <>
-            <h1>Clientes cadastrados</h1>
-            <h2>{resultado}</h2>
-            {resultado && 
-                resultado.map((resultado, index) => {
-                    return <p key={resultado.id}>{resultado.nome}</p>
-                })
-            }
-
+            {Usuario.getNome() ? (
+                <>
+            <h1 className={styles.titulo}>Clientes cadastrados</h1>
+            <br/>
+            {resultado && <TableClientes resultado={resultado}/>}
+                </>
+             ) : ( 
+                <h1>Não tá logado</h1>
+            )}
         </>
+
+       
     )
 
 }
