@@ -1,10 +1,11 @@
 var Usuario = (function() {
     var getNome = function() {
-      return localStorage.getItem('sessionName');  
+       let object =  JSON.parse(localStorage.getItem('sessionName'));  
+       return object ? object.usuario : "";
     };
   
     var setNome = function(nomeRecebido) {
-      localStorage.setItem('sessionName', nomeRecebido);     
+      localStorage.setItem('sessionName', JSON.stringify(nomeRecebido));     
     };
   
     return {

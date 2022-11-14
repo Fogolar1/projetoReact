@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import $ from 'jquery'
 import FormCliente from '../../layout/components/FormCliente';
-import Usuario from '../../layout/components/Usuario'
+import Usuario from '../../layout/components/Usuario';
 
 
 function EditarCliente(){
@@ -23,7 +23,7 @@ function EditarCliente(){
                 }
             })
         }
-        console.log(resultado);
+        console.log(resultado[0]);
     });
     
     return (
@@ -35,7 +35,7 @@ function EditarCliente(){
                     } 
                 </>
             ) : (
-                <h1>Não tá logado</h1>
+                <Navigate to="/" />
             )}
         </>
         

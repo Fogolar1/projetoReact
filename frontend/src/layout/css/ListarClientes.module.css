@@ -1,6 +1,4 @@
-.titulo{
-    align-self : center;
-    align-content: center;
-    width: 100%;
-    text-align: center;
+.titulo {
+    margin-left: 40%;
+    margin-top : 1%;
 }

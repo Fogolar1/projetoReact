@@ -9,3 +9,19 @@
 .tableWrapper td, th{
     border : 1px solid #ffff;
 }
+
+
+.transparent{
+    background-color: transparent;
+    border : 0px;
+}
+
+.transparent:hover{
+    cursor: pointer;
+}
+
+.excluir{
+    color : #d41131;
+    font-weight: bold;
+    font-size: 20px;
+}

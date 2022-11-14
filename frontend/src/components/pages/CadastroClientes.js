@@ -1,13 +1,19 @@
 import FormCliente from '../../layout/components/FormCliente'
 import Usuario from '../../layout/components/Usuario'
+import NavBar from '../../layout/components/NavBar'
+import {Navigate} from 'react-router-dom'
 
 function CadastroClientes(){
     return(
         <>
             {Usuario.getNome() ? (
-                <FormCliente />
+                <>
+                    <NavBar />
+                    <h1>Cadastrar Cliente</h1>
+                    <FormCliente />
+                </>
             ) : (
-                <h1>Não tá logado</h1>
+                <Navigate to="/" />
             )}
             
         </>

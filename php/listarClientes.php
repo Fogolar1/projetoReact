@@ -21,9 +21,28 @@ while($row = $resultado->fetch_assoc()) {
     $dataNascimento = $row["dataNascimento"];
     $cpf = $row["cpf"];
     $rg = $row["rg"];
-    $ddd = $row["ddd"];
-    $telefone = $row["telefone"];
+    $telefone =  "(". $row["ddd"] . ")" . $row["telefone"] ;
     $idUsuario = $row["idUsuario"];
+    
+    $query = $db->prepare("SELECT * FROM Enderecos where idCliente = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $enderecos = $query->get_result();
+
+    $enderecos_arr = array();
+
+    while($endereco = $enderecos->fetch_assoc()){
+        $idEndereco = $endereco["idEndereco"];
+        $numero = $endereco["numero"];
+        $logradouro = $endereco["logradouro"];
+        $bairro = $endereco["bairro"];
+        $cidade = $endereco["cidade"];
+        $enderecos_arr[] = array( "id" => $idEndereco,
+            "logradouro" => $logradouro,
+            "bairro" => $bairro,
+            "cidade" => $cidade,
+            "numero" => $numero);
+    }
 
     $return_arr[] = array("id" => $id,
     "nome" => $nomeCliente,
@@ -31,6 +50,7 @@ while($row = $resultado->fetch_assoc()) {
     "cpf" => $cpf,
     "rg" => $rg,
     "telefone" => $telefone,
+    "enderecos" => $enderecos_arr,
     "idUsuario" => $idUsuario);
 }
 

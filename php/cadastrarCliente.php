@@ -1,19 +1,24 @@
 <?php
 require 'connection/connection.php';
 
-echo var_dump($_POST);
 
 $nome = $_POST['nome'];
 $dataNasc = $_POST['dataNasc'];
-$cpf = $_POST['cpf'];
+$cpf = str_replace([".", "-"], "", $_POST['cpf']);
+
 $rg = $_POST['rg'];
 $telefone = $_POST['telefone'];
-$ddd = 47;
+
+$telefoneComDDD = explode(") ", $telefone);
+$telefone = str_replace("-", "", $telefoneComDDD[1]);
+$ddd = str_replace("(", "", $telefoneComDDD[0]);
+echo ($telefone);
 $idUser = 1;
-$id = $_POST["id"];
+$id = $_POST["idCliente"];
 
 
-if($id != null && $id != ""){
+
+if($id != null){
     $query = $db->prepare("UPDATE Clientes SET nomeCliente=?, dataNascimento=?, cpf=?, rg=?, ddd=?, telefone=? where idCliente=?");
     $query->bind_param("ssssiii", $nome, $dataNasc, $cpf, $rg, $ddd, $telefone, $id);
 }else{
@@ -30,24 +35,58 @@ if($id == null){
 $isNotNull = true;
 $contadora = 0;
 
+$enderecosToRemove = array();
+$query = $db->prepare("SELECT idEndereco FROM Enderecos WHERE idCliente = ?");
+$query->bind_param("i", $id);
+$query->execute();
+$resultado = $query->get_result();
+if($resultado->num_rows > 0){
+    $idsAtuais = $resultado->fetch_array();
+    $formEnderecos_id = array();
+
+    foreach($_POST as $key => $valor){
+        if(strpos($key ,"id") == 0){
+            $formEnderecos_id[] = array($valor);
+        }
+    }
+
+    foreach($idsAtuais as $idAtual){
+        if(!in_array($idAtual, $formEnderecos_id)){
+            $query = $db->prepare("DELETE FROM Enderecos WHERE idEndereco = ?");
+            $query->bind_param("i", $idAtual);
+            $query->execute();
+        }
+    }
+}
+
+
+
+
 while($isNotNull){
     $logradouro = $_POST['logradouro'.$contadora];
     $numero = $_POST['numero'.$contadora];
     $bairro = $_POST['bairro'.$contadora];
     $cidade = $_POST['cidade'.$contadora];
+    $idEndereco = $_POST['id'.$contadora];
     if($logradouro == null || $numero == null || $bairro == null || $cidade == null){
         $isNotNull = false;;
         break;
     }else{
-        $query = $db->prepare("INSERT INTO Enderecos(logradouro, bairro, cidade, numero, idCliente) VALUES (?, ?, ?, ?, ?)");
-        $query->bind_param("sssii", $logradouro, $bairro, $cidade, $numero, $id);
-        $query ->execute();
+        if($idEndereco != null){
+            $query = $db->prepare("UPDATE Enderecos SET logradouro=?, bairro=?, cidade=?, numero=?, idCliente=? WHERE idEndereco=? ");
+            $query->bind_param("sssiii", $logradouro, $bairro, $cidade, $numero, $id, $idEndereco);
+            $query ->execute();
+        }else{
+            $query = $db->prepare("INSERT INTO Enderecos(logradouro, bairro, cidade, numero, idCliente) VALUES (?, ?, ?, ?, ?)");
+            $query->bind_param("sssii", $logradouro, $bairro, $cidade, $numero, $id);
+            $query ->execute();
+        }
     }
 
     $contadora++;
 }
 
-
+echo "Cadastrado com Sucesso";
 
 $db->close();
 ?>

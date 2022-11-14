@@ -1,26 +1,20 @@
 import $ from 'jquery'
 import { Link } from 'react-router-dom';
 import styles from '../../layout/css/TableClientes.module.css'
-
+import {BsFillPencilFill} from 'react-icons/bs'
 
 function TableClientes({resultado}){
-    const campos = ["Id","Nome" ,"Data de Nascimento", "CPF", "RG","Telefone", "Editar", "Excluir"];
-
+    const campos = ["Id","Nome" ,"Data de Nascimento", "CPF", "RG","Telefone","Endereços", "Editar", "Excluir"];
 
     function excluir(e){
         if(window.confirm("Tem certeza que quer excluir o usuário?")){
-            let idCliente= e.target.id;
-            console.log(e.target.closest("tr"));
-            let idTable = e.target.closest("tr").key;
-                 
+            let idCliente= $(e.target).parent().attr("id");
             $.ajax({
                 url: 'http://localhost:8000/excluirCliente.php',
                 type: 'POST',
                 data : {id : idCliente},
-                success : function(response){
-                   console.log(response);
-                   delete resultado[idTable];
-                   window.location.reload(false);
+                success : function(){
+                  window.location.reload(false);
                 }
             })
         }
@@ -47,8 +41,20 @@ function TableClientes({resultado}){
                             <td >{cliente.cpf}</td>
                             <td >{cliente.rg}</td>
                             <td >{cliente.telefone}</td>
-                            <td> <Link to="/editarCliente" state={{ id : cliente.id}}><button>Editar {cliente.id}</button></Link></td>
-                            <td> <button id={cliente.id} onClick={excluir}>Excluir</button></td>
+                            <td>
+                            {cliente.enderecos.map((endereco, index) => {
+                                return (
+                                    <>
+                                        <p key={index}>{endereco.logradouro}, número {endereco.numero}, {endereco.bairro}, {endereco.cidade}</p>
+                                        <br/>
+                                    </>
+                                    
+                                )
+                            })}
+                            </td>
+                            
+                            <td> <Link to="/editarCliente" state={{ id : cliente.id}}><button className={styles.transparent}><BsFillPencilFill/></button></Link></td>
+                            <td> <button id={cliente.id} onClick={excluir} className={styles.transparent}><p className={styles.excluir}>X</p></button></td>
                         </tr>  
                     ) 
                 })}
