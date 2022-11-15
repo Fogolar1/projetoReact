@@ -1,6 +1,38 @@
-.botao{
+.login{
     background-color : #2250e6;
     width: 20%;
     height: 25px;
     border-radius: 100px;
+}
+
+.cadastro{
+    background-color : #2250e6;
+    width: 10%;
+    height: 25px;
+    border-radius: 100px;
+}
+
+.erroCadastro, .successCadastro, .erro, .success {
+    margin-top : 5px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-left: -3%;
+}
+
+.erro, .erroCadastro{ 
+    background-color: lightcoral;
+    color : red;
+    border : 2px red solid;
+}
+
+.successCadastro, .erroCadastro{
+    max-width: 32%;
+}
+
+.success, .successCadastro{
+    margin-top : 5px;
+    background-color: lightgreen;
+    color : green;
+    border : 2px green solid;
 }

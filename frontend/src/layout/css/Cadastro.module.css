@@ -1,0 +1,24 @@
+.cadastro{
+    margin-left: 40%;
+}
+
+.titulo{
+    margin-top: 1%;
+    margin-left: 43%;
+    margin-bottom : 5px;
+}
+
+.cadastro button{
+    margin-left: 10%;
+}
+
+.voltar{
+    background-color : #2250e6;
+    height: 25px;
+    border-radius: 100px;
+    width: 4%;
+    display: flex;
+    justify-content: center;
+    margin-top : -25px;
+    margin-left : 41%;
+}

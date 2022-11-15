@@ -12,8 +12,7 @@ $telefone = $_POST['telefone'];
 $telefoneComDDD = explode(") ", $telefone);
 $telefone = str_replace("-", "", $telefoneComDDD[1]);
 $ddd = str_replace("(", "", $telefoneComDDD[0]);
-echo ($telefone);
-$idUser = 1;
+$idUser = $_POST['idUsuario'];
 $id = $_POST["idCliente"];
 
 
@@ -35,21 +34,25 @@ if($id == null){
 $isNotNull = true;
 $contadora = 0;
 
-$enderecosToRemove = array();
 $query = $db->prepare("SELECT idEndereco FROM Enderecos WHERE idCliente = ?");
 $query->bind_param("i", $id);
 $query->execute();
 $resultado = $query->get_result();
 if($resultado->num_rows > 0){
-    $idsAtuais = $resultado->fetch_array();
+    while($row = $resultado->fetch_assoc()){
+        $idsAtuais[] = $row['idEndereco'];
+    }
+  
     $formEnderecos_id = array();
 
     foreach($_POST as $key => $valor){
-        if(strpos($key ,"id") == 0){
-            $formEnderecos_id[] = array($valor);
+        if(str_starts_with($key ,"id") && $key != "idCliente"){
+            echo $key;
+            array_push($formEnderecos_id, $valor);
         }
     }
-
+    echo var_dump($formEnderecos_id);
+    echo var_dump($idsAtuais);
     foreach($idsAtuais as $idAtual){
         if(!in_array($idAtual, $formEnderecos_id)){
             $query = $db->prepare("DELETE FROM Enderecos WHERE idEndereco = ?");
@@ -58,8 +61,6 @@ if($resultado->num_rows > 0){
         }
     }
 }
-
-
 
 
 while($isNotNull){
@@ -85,8 +86,6 @@ while($isNotNull){
 
     $contadora++;
 }
-
-echo "Cadastrado com Sucesso";
 
 $db->close();
 ?>

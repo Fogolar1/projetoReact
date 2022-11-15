@@ -17,10 +17,16 @@ function NavBar(){
                 <ul className={styles.ulWrap}>
                     <ul className={styles.list}>
                         <li className={styles.item}>
+                            <p>Projeto React</p>
+                        </li>
+                        <li className={styles.item}>
                             <Link to="/cadastrarClientes">Cadastrar Clientes</Link>
                         </li>
                         <li className={styles.item}>
                             <Link to="/clientes">Listar Clientes</Link>
+                        </li>
+                        <li className={styles.item}>
+                            <Link to="/cadastro">Cadastrar Usuário</Link>
                         </li>
                     </ul>
                     <li className={styles.usuario}>

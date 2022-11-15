@@ -19,9 +19,17 @@ while($row = $resultado->fetch_assoc()) {
     $id = $row["idCliente"];
     $nomeCliente = $row["nomeCliente"];
     $dataNascimento = $row["dataNascimento"];
-    $cpf = $row["cpf"];
+
+    if($idCliente == null){
+        $dataNascimento = date("d/m/Y", strtotime($dataNascimento));
+    }
+    
+    $cpf = substr_replace($row["cpf"], ".", 3, 0);
+    $cpf = substr_replace($cpf, ".", 7, 0);
+    $cpf = substr_replace($cpf, "-", 11, 0);
+    
     $rg = $row["rg"];
-    $telefone =  "(". $row["ddd"] . ")" . $row["telefone"] ;
+    $telefone =  "(". $row["ddd"] . ") " . substr_replace($row["telefone"], "-", 5, 0) ;
     $idUsuario = $row["idUsuario"];
     
     $query = $db->prepare("SELECT * FROM Enderecos where idCliente = ?");

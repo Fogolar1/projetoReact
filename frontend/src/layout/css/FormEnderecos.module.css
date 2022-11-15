@@ -1,0 +1,33 @@
+.line{
+    margin-right : 10%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.inputWrapper{
+    display : flex;
+    justify-content: space-between;   
+    flex-wrap : wrap;
+    width: 32%;
+}
+
+.botaoAdicionar{
+    background-color: lightgreen;
+    width : 6%;
+    border-radius: 7px;
+    border : 0;
+    height: 20px;
+}
+
+.botaoRemover{
+    background-color: lightcoral;
+    width : 6%;
+    border-radius: 7px;
+    border : 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top : -19px;
+    margin-left : 7%;
+    height: 20px;
+}

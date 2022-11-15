@@ -14,13 +14,12 @@ $resultado = $query->get_result();
 if($resultado->num_rows > 0){
     while($row = $resultado->fetch_assoc()) {
         if($row["senhaUsuario"] == $senha){
-            echo("login");
+            echo($row['idUsuario']);
             $db->close();
             return;
         }
     }
 }
 
-echo("teste");
 $db->close();
 ?>

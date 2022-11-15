@@ -1,13 +1,13 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "neo@123";
-$database = "projetoReact";
+$password = "root@123";
+$database = "projetokabum";
 
 $db = mysqli_connect($servername, $username, $password, $database);
 
 if($db->connect_error){
     die("Erro de conexão: " . $db->connect_error);
 }
-header('Access-Control-Allow-Origin: http://localhost:3000');
+header('Access-Control-Allow-Origin: http://localhost:3001');
 ?>
